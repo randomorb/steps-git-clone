@@ -7,9 +7,9 @@ description: |
   If a git commit is provided, it will ignore the tag and branch parameters.
   If a tag is provided instead of a git commit, then it will ignore the branch parameter.
   If no `branch` parameter is provided, then it'll skip the `git checkout`.
-website: https://github.com/bitrise-io/steps-git-clone
-source_code_url: https://github.com/bitrise-io/steps-git-clone
-support_url: https://github.com/bitrise-io/steps-git-clone/issues
+website: https://github.com/arifken/steps-git-clone
+source_code_url: https://github.com/arifken/steps-git-clone
+support_url: https://github.com/arifken/steps-git-clone/issues
 type_tags:
   - utility
 is_requires_admin_user: false
@@ -18,7 +18,7 @@ is_skippable: false
 run_if: .IsCI
 toolkit:
   go:
-    package_name: github.com/bitrise-io/steps-git-clone
+    package_name: github.com/arifken/steps-git-clone
 inputs:
   - repository_url: "$GIT_REPOSITORY_URL"
     opts:
