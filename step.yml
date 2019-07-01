@@ -29,6 +29,18 @@ inputs:
     opts:
       title: "Clone destination (local) directory path"
       is_required: true
+  - http_user: "$BITRISE_GIT_HTTP_USER"
+    opts:
+      category: Clone Config
+      title: "If using HTTP, the user to authenticate with."
+      is_dont_change_value: true
+      is_sensitive: true
+  - http_token: "$BITRISE_GIT_HTTP_TOKEN"
+    opts:
+      category: Clone Config
+      title: "If using HTTP, the token to authenticate with."
+      is_dont_change_value: true
+      is_sensitive: true
   - commit: "$BITRISE_GIT_COMMIT"
     opts:
       category: Clone Config
@@ -72,6 +84,18 @@ inputs:
         Update the registered submodules?
       description: |-
         Update the registered submodules?
+      value_options:
+      - "yes"
+      - "no"
+  - ssl_verify: "yes"
+    opts:
+      category: Clone Config
+      title: Verify SSL when connecting to remote?
+      summary: |-
+        Verify SSL when connecting to remote?
+      description: |-
+        Some repository hosts may not have a valid certificate chain. Set this to "no" in 
+        order to bypass SSL verification when making the connection to the remote host.
       value_options:
       - "yes"
       - "no"

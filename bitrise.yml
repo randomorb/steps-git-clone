@@ -28,6 +28,7 @@ workflows:
         - branch: "master"
         - pull_request_id: ""
         - clone_depth: ""
+        - ssl_verify: "yes"
     - script:
         inputs:
         - content: |-

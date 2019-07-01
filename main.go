@@ -29,6 +29,10 @@ type config struct {
 	BuildAPIToken    string `env:"build_api_token"`
 	UpdateSubmodules bool   `env:"update_submodules,opt[yes,no]"`
 	ManualMerge      bool   `env:"manual_merge,opt[yes,no]"`
+
+	SSLVerify bool   `env:"ssl_verify,opt[yes,no]"`
+	HTTPUser  string `env:"http_user"`
+	HTTPToken string `env:"http_token"`
 }
 
 func printLogAndExportEnv(gitCmd git.Git, format, env string) error {
@@ -58,6 +62,12 @@ func mainE() error {
 	}
 	stepconf.Print(cfg)
 
+	if len(cfg.HTTPUser) > 0 && len(cfg.HTTPToken) > 0 && strings.HasPrefix(cfg.RepositoryURL, "http") {
+		components := strings.SplitAfter(cfg.RepositoryURL, "://")
+		cfg.RepositoryURL = components[0] + cfg.HTTPUser + ":" + cfg.HTTPToken + "@" + components[1]
+		log.Infof("updated repo url: %s \n", cfg.RepositoryURL)
+	}
+
 	gitCmd, err := git.New(cfg.CloneIntoDir)
 	if err != nil {
 		return fmt.Errorf("create gitCmd project, error: %v", err)
@@ -80,6 +90,12 @@ func mainE() error {
 	if !originPresent {
 		if err := run(gitCmd.RemoteAdd("origin", cfg.RepositoryURL)); err != nil {
 			return fmt.Errorf("add remote repository (%s), error: %v", cfg.RepositoryURL, err)
+		}
+	}
+
+	if !cfg.SSLVerify {
+		if err := run(gitCmd.Config("http.sslVerify", "false")); err != nil {
+			return fmt.Errorf("set config http.sslVerify false, error: %v", err)
 		}
 	}
 
