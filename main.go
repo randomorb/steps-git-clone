@@ -5,9 +5,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bitrise-io/go-utils/command"
-	"github.com/bitrise-io/go-utils/command/git"
-	"github.com/bitrise-io/go-utils/log"
+	"github.com/arifken/go-utils/command"
+	"github.com/arifken/go-utils/command/git"
+	"github.com/arifken/go-utils/log"
 	"github.com/bitrise-tools/go-steputils/stepconf"
 )
 

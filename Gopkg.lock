@@ -2,30 +2,52 @@
 
 
 [[projects]]
-  branch = "master"
-  name = "github.com/bitrise-io/go-utils"
+  branch = "dep-namespace-fork-donotmerge"
+  digest = "1:78f1c9c77a39db8a3e79f9530334a1f9a1d3c273ff7c434ecb3ef09881906a59"
+  name = "github.com/arifken/go-utils"
   packages = [
     "colorstring",
     "command",
     "command/git",
     "errorutil",
     "log",
-    "parseutil",
     "pathutil",
-    "pointers",
-    "retry"
+    "retry",
   ]
+  pruneopts = ""
+  revision = "05109095e08548b2a99c0338eb75b43df7337e39"
+
+[[projects]]
+  branch = "master"
+  digest = "1:5c76373d03ec69eb5c0ee65437f4a4f1bd12cbb3f1e3aa26a808e447804d9308"
+  name = "github.com/bitrise-io/go-utils"
+  packages = [
+    "colorstring",
+    "log",
+    "parseutil",
+    "pointers",
+  ]
+  pruneopts = ""
   revision = "b33f6bcef9b50045d7e62364b354584afc3ee329"
 
 [[projects]]
   branch = "master"
+  digest = "1:fb6b468055581c11777bbb8ca1fb3640cecf9eb64c74852fc9bd87b0e664716e"
   name = "github.com/bitrise-tools/go-steputils"
   packages = ["stepconf"]
+  pruneopts = ""
   revision = "b0e1079aa921440413a5c56f301246fe8367c072"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4c4ec3bda791e16da395415c258a5145bfb536b4662f0e87d066f2569bba80dd"
+  input-imports = [
+    "github.com/arifken/go-utils/command",
+    "github.com/arifken/go-utils/command/git",
+    "github.com/arifken/go-utils/log",
+    "github.com/arifken/go-utils/pathutil",
+    "github.com/arifken/go-utils/retry",
+    "github.com/bitrise-tools/go-steputils/stepconf",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1

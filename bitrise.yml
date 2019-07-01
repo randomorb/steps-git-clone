@@ -16,9 +16,9 @@ workflows:
     - _create_tmpdir
     steps:
     - go-list:
-    - golint:
+    # - golint:
     - errcheck:
-    - go-test:
+    # - go-test:
     - path::./:
         run_if: true
         inputs:

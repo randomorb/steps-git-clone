@@ -9,11 +9,11 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/bitrise-io/go-utils/command"
-	"github.com/bitrise-io/go-utils/command/git"
-	"github.com/bitrise-io/go-utils/log"
-	"github.com/bitrise-io/go-utils/pathutil"
-	"github.com/bitrise-io/go-utils/retry"
+	"github.com/arifken/go-utils/command"
+	"github.com/arifken/go-utils/command/git"
+	"github.com/arifken/go-utils/log"
+	"github.com/arifken/go-utils/pathutil"
+	"github.com/arifken/go-utils/retry"
 )
 
 func isOriginPresent(gitCmd git.Git, dir, repoURL string) (bool, error) {
