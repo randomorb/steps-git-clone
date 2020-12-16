@@ -2,6 +2,7 @@ package gitclone
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bitrise-io/bitrise-init/step"
 	"github.com/bitrise-io/envman/envman"
@@ -21,7 +22,7 @@ type Config struct {
 	BranchDest      string `env:"branch_dest"`
 	PRID            int    `env:"pull_request_id"`
 	PRRepositoryURL string `env:"pull_request_repository_url"`
-	PRMergeBranch   string `env:"pull_request_merge_branch"`
+	PRMergeBranch   string `env:"branch"`
 	ResetRepository bool   `env:"reset_repository,opt[Yes,No]"`
 	CloneDepth      int    `env:"clone_depth"`
 
