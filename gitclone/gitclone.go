@@ -2,6 +2,7 @@ package gitclone
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/bitrise-io/bitrise-init/step"
 	"github.com/bitrise-io/envman/envman"
@@ -29,6 +30,10 @@ type Config struct {
 	BuildAPIToken    string `env:"build_api_token"`
 	UpdateSubmodules bool   `env:"update_submodules,opt[yes,no]"`
 	ManualMerge      bool   `env:"manual_merge,opt[yes,no]"`
+
+	SSLVerify bool   `env:"ssl_verify,opt[yes,no]"`
+	HTTPUser  string `env:"http_user"`
+	HTTPToken string `env:"http_token"`
 }
 
 const (
@@ -76,6 +81,12 @@ func Execute(cfg Config) *step.Error {
 		)
 	}
 
+	if len(cfg.HTTPUser) > 0 && len(cfg.HTTPToken) > 0 && strings.HasPrefix(cfg.RepositoryURL, "http") {
+		components := strings.SplitAfter(cfg.RepositoryURL, "://")
+		cfg.RepositoryURL = components[0] + cfg.HTTPUser + ":" + cfg.HTTPToken + "@" + components[1]
+		log.Infof("updated repo url: %s \n", cfg.RepositoryURL)
+	}
+
 	gitCmd, err := git.New(cfg.CloneIntoDir)
 	if err != nil {
 		return newStepError(
@@ -118,6 +129,12 @@ func Execute(cfg Config) *step.Error {
 				fmt.Errorf("adding remote repository failed (%s): %v", cfg.RepositoryURL, err),
 				"Adding remote repository failed",
 			)
+		}
+	}
+
+	if !cfg.SSLVerify {
+		if err := run(gitCmd.Config("http.sslVerify", "false")); err != nil {
+			return fmt.Errorf("set config http.sslVerify false, error: %v", err)
 		}
 	}
 

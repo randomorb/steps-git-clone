@@ -26,7 +26,7 @@ workflows:
     - _test_too_long_commit_message
     steps:
     - activate-ssh-key:
-        run_if: true
+        run_if: false
 
   ci:
     envs:
@@ -34,7 +34,7 @@ workflows:
     - GIT_REPOSITORY_URL: https://github.com/bitrise-io/git-clone-test.git
     steps:
     - activate-ssh-key:
-        run_if: true
+        run_if: false
     - go-list:
     - golint:
     - errcheck:
