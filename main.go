@@ -15,30 +15,6 @@ func failf(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-type config struct {
-	RepositoryURL string `env:"repository_url,required"`
-	CloneIntoDir  string `env:"clone_into_dir,required"`
-	Commit        string `env:"commit"`
-	Tag           string `env:"tag"`
-	Branch        string `env:"branch"`
-
-	BranchDest      string `env:"branch_dest"`
-	PRID            int    `env:"pull_request_id"`
-	PRRepositoryURL string `env:"pull_request_repository_url"`
-	PRMergeBranch   string `env:"pull_request_merge_branch"`
-	ResetRepository bool   `env:"reset_repository,opt[Yes,No]"`
-	CloneDepth      int    `env:"clone_depth"`
-
-	BuildURL         string `env:"build_url"`
-	BuildAPIToken    string `env:"build_api_token"`
-	UpdateSubmodules bool   `env:"update_submodules,opt[yes,no]"`
-	ManualMerge      bool   `env:"manual_merge,opt[yes,no]"`
-
-	SSLVerify bool   `env:"ssl_verify,opt[yes,no]"`
-	HTTPUser  string `env:"http_user"`
-	HTTPToken string `env:"http_token"`
-}
-
 func printLogAndExportEnv(gitCmd git.Git, format, env string) error {
 	l, err := output(gitCmd.Log(format))
 	if err != nil {

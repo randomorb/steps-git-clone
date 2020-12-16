@@ -29,6 +29,10 @@ type Config struct {
 	BuildAPIToken    string `env:"build_api_token"`
 	UpdateSubmodules bool   `env:"update_submodules,opt[yes,no]"`
 	ManualMerge      bool   `env:"manual_merge,opt[yes,no]"`
+
+	SSLVerify bool   `env:"ssl_verify,opt[yes,no]"`
+	HTTPUser  string `env:"http_user"`
+	HTTPToken string `env:"http_token"`
 }
 
 const (
